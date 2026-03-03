@@ -1,0 +1,59 @@
+=====================================
+GRAFFS.IO LOGO — COPY-PASTE SNIPPETS
+=====================================
+
+
+1. LOGO COMPONENT (React/TSX)
+------------------------------
+
+function GraffsLogo({ size = 24, className = "" }: { size?: number; className?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+      <path
+        d="M12 1.5 L22.5 12 L12 22.5 L1.5 12 Z"
+        stroke="currentColor"
+        strokeWidth="0.85"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14.9 8.5 A 4.5 4.5 0 1 0 16.5 12 H 12"
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+
+2. HEADER USAGE (with text)
+----------------------------
+
+<div className="flex items-center gap-3">
+  <GraffsLogo size={26} className="text-foreground" />
+  <span className="text-[15px]">
+    <span className="font-semibold tracking-[0.08em] uppercase text-[13px]">Graffs</span>
+    <span className="text-muted-foreground font-light">.io</span>
+  </span>
+</div>
+
+
+3. FOOTER USAGE (smaller)
+---------------------------
+
+<div className="flex items-center gap-2.5">
+  <GraffsLogo size={16} className="text-muted-foreground" />
+  <span className="text-muted-foreground tracking-[0.06em] uppercase text-[11px]">
+    Graffs<span className="lowercase tracking-normal">.io</span>
+  </span>
+</div>
+
+
+4. RAW SVG (plain HTML, no React)
+-----------------------------------
+
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+  <path d="M12 1.5 L22.5 12 L12 22.5 L1.5 12 Z" stroke="currentColor" stroke-width="0.85" stroke-linejoin="round"/>
+  <path d="M14.9 8.5 A 4.5 4.5 0 1 0 16.5 12 H 12" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

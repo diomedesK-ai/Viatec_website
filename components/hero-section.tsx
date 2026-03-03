@@ -5,7 +5,7 @@ export function HeroSection() {
         <h1 className="text-6xl md:text-[5.5rem] lg:text-[7rem] font-bold tracking-[-0.045em] leading-[0.95] text-foreground">
           Turn complexity
           <br />
-          into clarity.
+          into clear action.
         </h1>
         <p className="mt-7 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           An industry-native agentic intelligence platform that discovers

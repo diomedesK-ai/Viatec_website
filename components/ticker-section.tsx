@@ -1,12 +1,12 @@
 "use client"
 
 const testimonials = [
-  { quote: "Root cause in seconds, not days.", name: "Sarah Mitchell", title: "VP Operations, NorthStar Utility" },
-  { quote: "This changes how we think about fleet data.", name: "David Chen", title: "CTO, SouthWest Energy" },
-  { quote: "The TCO calculator alone paid for itself.", name: "Michael Torres", title: "CFO, National Fleet Co." },
-  { quote: "Like having a data scientist on every asset.", name: "Elena Kowalski", title: "VP Engineering, Pacific Grid" },
-  { quote: "Our agents caught an anomaly before the sensor alarm.", name: "James Park", title: "Reliability Engineer" },
-  { quote: "Finally, intelligence that actually acts.", name: "Rachel Adams", title: "Director of Operations" },
+  { quote: "Root cause in seconds, not days.", name: "Sarah M.", title: "VP Operations" },
+  { quote: "This changes how we think about fleet data.", name: "David C.", title: "Chief Technology Officer" },
+  { quote: "The TCO calculator alone paid for itself.", name: "Michael T.", title: "Chief Financial Officer" },
+  { quote: "Like having a data scientist on every asset.", name: "Elena K.", title: "VP Engineering" },
+  { quote: "Our agents caught an anomaly before the sensor alarm.", name: "James P.", title: "Reliability Engineer" },
+  { quote: "Finally, intelligence that actually acts.", name: "Rachel A.", title: "Director of Operations" },
 ]
 
 export function TickerSection() {
