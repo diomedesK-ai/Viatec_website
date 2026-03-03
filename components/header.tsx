@@ -2,21 +2,22 @@
 
 import { useState } from "react"
 
-function GraffsLogo({ size = 20, className = "" }: { size?: number; className?: string }) {
+function GraffsLogo({ size = 24, className = "" }: { size?: number; className?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
       <path
-        d="M12 2 L22 12 L12 22 L2 12 Z"
+        d="M12 1.5 L22.5 12 L12 22.5 L1.5 12 Z"
         stroke="currentColor"
-        strokeWidth="1.2"
-        fill="none"
+        strokeWidth="0.85"
+        strokeLinejoin="round"
       />
       <path
-        d="M12 7 L17 12 L12 17 L7 12 Z"
-        fill="currentColor"
-        opacity="0.15"
+        d="M14.9 8.5 A 4.5 4.5 0 1 0 16.5 12 H 12"
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
-      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
     </svg>
   )
 }
@@ -28,7 +29,7 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-foreground/[0.04]">
       <div className="max-w-5xl mx-auto px-6 h-[60px] flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <GraffsLogo size={22} className="text-foreground" />
+          <GraffsLogo size={26} className="text-foreground" />
           <span className="text-[15px]">
             <span className="font-semibold tracking-[0.08em] uppercase text-[13px]">Graffs</span>
             <span className="text-muted-foreground font-light">.io</span>

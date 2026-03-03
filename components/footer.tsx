@@ -17,12 +17,12 @@ export function Footer() {
 
       <div className="max-w-5xl mx-auto px-6">
         <div className="pt-10 border-t border-foreground/[0.06] flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-muted-foreground">
-              <path d="M12 2 L22 12 L12 22 L2 12 Z" stroke="currentColor" strokeWidth="1.2" fill="none" />
-              <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+          <div className="flex items-center gap-2.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-muted-foreground">
+              <path d="M12 1.5 L22.5 12 L12 22.5 L1.5 12 Z" stroke="currentColor" strokeWidth="0.85" strokeLinejoin="round" />
+              <path d="M14.9 8.5 A 4.5 4.5 0 1 0 16.5 12 H 12" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span className="text-sm text-muted-foreground tracking-[0.06em] uppercase text-[11px]">Graffs<span className="lowercase tracking-normal">.io</span></span>
+            <span className="text-muted-foreground tracking-[0.06em] uppercase text-[11px]">Graffs<span className="lowercase tracking-normal">.io</span></span>
           </div>
           <p className="text-xs text-muted-foreground tracking-[0.05em]">
             Agentic Industry Intelligence
