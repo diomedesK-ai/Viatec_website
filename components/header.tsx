@@ -37,7 +37,7 @@ export function Header() {
         </div>
 
         <a
-          href="https://graffsiointelligence.vercel.app/login"
+          href="https://demo.graffs.io/login"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden md:inline-flex h-10 px-6 items-center justify-center rounded-full bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
@@ -70,7 +70,7 @@ export function Header() {
       {menuOpen && (
         <div className="md:hidden border-t border-border/40 bg-background px-6 py-5">
           <a
-            href="https://graffsiointelligence.vercel.app/login"
+            href="https://demo.graffs.io/login"
             target="_blank"
             rel="noopener noreferrer"
             className="flex w-full h-11 items-center justify-center rounded-full bg-foreground text-background text-sm font-medium cursor-pointer"

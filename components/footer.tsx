@@ -6,7 +6,7 @@ export function Footer() {
           See it in action.
         </h2>
         <a
-          href="https://graffsiointelligence.vercel.app/login"
+          href="https://demo.graffs.io/login"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex h-13 px-10 items-center justify-center rounded-full bg-foreground text-background text-base font-medium hover:opacity-90 transition-opacity cursor-pointer"
