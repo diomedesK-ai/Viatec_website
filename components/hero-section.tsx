@@ -1,30 +1,44 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 
 const rotatingWords = [
   "clarity.",
   "action.",
   "outcomes.",
-  "competitive edge.",
   "command.",
   "foresight.",
 ]
 
 export function HeroSection() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isVisible, setIsVisible] = useState(true)
+  const [displayText, setDisplayText] = useState("")
+  const [wordIndex, setWordIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  const tick = useCallback(() => {
+    const currentWord = rotatingWords[wordIndex]
+
+    if (!isDeleting) {
+      setDisplayText(currentWord.slice(0, displayText.length + 1))
+      if (displayText.length + 1 === currentWord.length) {
+        setTimeout(() => setIsDeleting(true), 1800)
+        return
+      }
+    } else {
+      setDisplayText(currentWord.slice(0, displayText.length - 1))
+      if (displayText.length - 1 === 0) {
+        setIsDeleting(false)
+        setWordIndex((prev) => (prev + 1) % rotatingWords.length)
+        return
+      }
+    }
+  }, [displayText, wordIndex, isDeleting])
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIsVisible(false)
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % rotatingWords.length)
-        setIsVisible(true)
-      }, 400)
-    }, 2800)
-    return () => clearInterval(interval)
-  }, [])
+    const speed = isDeleting ? 40 : 80
+    const timer = setTimeout(tick, speed)
+    return () => clearTimeout(timer)
+  }, [tick, isDeleting])
 
   return (
     <section className="pt-32 pb-0 md:pt-44">
@@ -34,15 +48,9 @@ export function HeroSection() {
           <br />
           <span className="inline-flex items-baseline">
             into{" "}
-            <span
-              className="inline-block transition-all duration-500 ease-out ml-[0.25em]"
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(0)" : "translateY(12px)",
-                filter: isVisible ? "blur(0px)" : "blur(4px)",
-              }}
-            >
-              {rotatingWords[currentIndex]}
+            <span className="inline-block ml-[0.25em] min-w-[2ch] text-left">
+              {displayText}
+              <span className="inline-block w-[3px] h-[0.85em] bg-foreground/80 ml-[1px] align-baseline animate-blink" />
             </span>
           </span>
         </h1>
