@@ -1,11 +1,50 @@
+"use client"
+
+import { useState, useEffect } from "react"
+
+const rotatingWords = [
+  "clarity.",
+  "action.",
+  "outcomes.",
+  "competitive edge.",
+  "command.",
+  "foresight.",
+]
+
 export function HeroSection() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isVisible, setIsVisible] = useState(true)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsVisible(false)
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % rotatingWords.length)
+        setIsVisible(true)
+      }, 400)
+    }, 2800)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <section className="pt-32 pb-0 md:pt-44">
       <div className="max-w-5xl mx-auto px-6 text-center animate-hero-enter">
         <h1 className="text-6xl md:text-[5.5rem] lg:text-[7rem] font-bold tracking-[-0.045em] leading-[0.95] text-foreground">
           Turn complexity
           <br />
-          into clear action.
+          <span className="inline-flex items-baseline">
+            into{" "}
+            <span
+              className="inline-block transition-all duration-500 ease-out ml-[0.25em]"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0)" : "translateY(12px)",
+                filter: isVisible ? "blur(0px)" : "blur(4px)",
+              }}
+            >
+              {rotatingWords[currentIndex]}
+            </span>
+          </span>
         </h1>
         <p className="mt-7 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           An industry-native agentic intelligence platform that discovers
