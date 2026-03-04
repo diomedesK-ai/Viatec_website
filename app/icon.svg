@@ -1,15 +1,15 @@
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path
-    d="M12 1.5 L22.5 12 L12 22.5 L1.5 12 Z"
+    d="M16 2 L30 16 L16 30 L2 16 Z"
     stroke="#111"
-    stroke-width="0.85"
+    stroke-width="1.6"
     stroke-linejoin="round"
     fill="none"
   />
   <path
-    d="M14.9 8.5 A 4.5 4.5 0 1 0 16.5 12 H 12"
+    d="M19.8 11 A 6 6 0 1 0 22 16 H 16"
     stroke="#111"
-    stroke-width="1.35"
+    stroke-width="2.4"
     stroke-linecap="round"
     stroke-linejoin="round"
     fill="none"

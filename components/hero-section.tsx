@@ -27,6 +27,10 @@ const heroImages = [
     src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2400&q=90&auto=format&fit=crop",
     alt: "Telecommunications infrastructure and network operations",
   },
+  {
+    src: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=2400&q=90&auto=format&fit=crop",
+    alt: "5G network tower and next-generation wireless infrastructure",
+  },
 ]
 
 export function HeroSection() {
