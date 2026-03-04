@@ -87,7 +87,7 @@ export function HeroSection() {
         </p>
       </div>
 
-      <div className="max-w-[1100px] mx-auto px-6 mt-14 md:mt-20 animate-hero-image-enter">
+      <div className="max-w-[1400px] mx-auto px-6 mt-14 md:mt-20 animate-hero-image-enter">
         <div className="relative rounded-3xl overflow-hidden shadow-[0_80px_160px_-40px_rgba(0,0,0,0.3)] aspect-[16/9]">
           {heroImages.map((img, i) => (
             <img
