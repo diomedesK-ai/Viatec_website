@@ -25,11 +25,15 @@ const heroImages = [
   },
   {
     src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2400&q=90&auto=format&fit=crop",
-    alt: "Telecommunications infrastructure and network operations",
+    alt: "Data center infrastructure and network operations",
   },
   {
-    src: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=2400&q=90&auto=format&fit=crop",
-    alt: "5G network tower and next-generation wireless infrastructure",
+    src: "https://images.unsplash.com/photo-1587370286959-23439ee6a87e?w=2400&q=90&auto=format&fit=crop",
+    alt: "5G cell tower against clear blue sky",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=2400&q=90&auto=format&fit=crop",
+    alt: "High-voltage transmission tower against bright blue sky",
   },
 ]
 
@@ -104,6 +108,20 @@ export function HeroSection() {
             />
           ))}
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-black/5 pointer-events-none" />
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {heroImages.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setImageIndex(i)}
+                aria-label={`Go to image ${i + 1}`}
+                className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                  i === imageIndex
+                    ? "bg-white/80 scale-110"
+                    : "bg-white/30 hover:bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
