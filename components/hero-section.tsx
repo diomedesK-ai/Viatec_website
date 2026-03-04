@@ -10,10 +10,30 @@ const rotatingWords = [
   "foresight.",
 ]
 
+const heroImages = [
+  {
+    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=2400&q=90&auto=format&fit=crop",
+    alt: "Advanced manufacturing and industrial automation",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=2400&q=90&auto=format&fit=crop",
+    alt: "Pharmaceutical research and drug manufacturing",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=2400&q=90&auto=format&fit=crop",
+    alt: "Electric vehicle battery technology and EV charging",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2400&q=90&auto=format&fit=crop",
+    alt: "Telecommunications infrastructure and network operations",
+  },
+]
+
 export function HeroSection() {
   const [displayText, setDisplayText] = useState("")
   const [wordIndex, setWordIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [imageIndex, setImageIndex] = useState(0)
 
   const tick = useCallback(() => {
     const currentWord = rotatingWords[wordIndex]
@@ -40,6 +60,13 @@ export function HeroSection() {
     return () => clearTimeout(timer)
   }, [tick, isDeleting])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setImageIndex((prev) => (prev + 1) % heroImages.length)
+    }, 6000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <section className="pt-32 pb-0 md:pt-44">
       <div className="max-w-5xl mx-auto px-6 text-center animate-hero-enter">
@@ -61,13 +88,17 @@ export function HeroSection() {
       </div>
 
       <div className="max-w-[1100px] mx-auto px-6 mt-14 md:mt-20 animate-hero-image-enter">
-        <div className="relative rounded-3xl overflow-hidden shadow-[0_80px_160px_-40px_rgba(0,0,0,0.3)]">
-          <img
-            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=2400&q=90&auto=format&fit=crop"
-            alt="Modern smart industrial facility with autonomous intelligent systems"
-            className="w-full h-auto block"
-            draggable={false}
-          />
+        <div className="relative rounded-3xl overflow-hidden shadow-[0_80px_160px_-40px_rgba(0,0,0,0.3)] aspect-[16/9]">
+          {heroImages.map((img, i) => (
+            <img
+              key={img.src}
+              src={img.src}
+              alt={img.alt}
+              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ease-in-out"
+              style={{ opacity: i === imageIndex ? 1 : 0 }}
+              draggable={false}
+            />
+          ))}
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-black/5 pointer-events-none" />
         </div>
       </div>
