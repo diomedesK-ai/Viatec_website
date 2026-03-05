@@ -1,6 +1,7 @@
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { TickerSection } from "@/components/ticker-section"
+import { ValueProposition } from "@/components/value-proposition"
 import { MetricsSection } from "@/components/metrics-section"
 import { ServiceAnatomy } from "@/components/service-anatomy"
 import { PlatformAnatomy } from "@/components/platform-anatomy"
@@ -15,6 +16,7 @@ export default function Home() {
       <Header />
       <HeroSection />
       <TickerSection />
+      <ValueProposition />
       <MetricsSection />
       <ServiceAnatomy />
       <PlatformAnatomy />
