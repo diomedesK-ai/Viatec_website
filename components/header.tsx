@@ -36,14 +36,30 @@ export function Header() {
           </span>
         </div>
 
-        <a
-          href="https://demo.graffs.io/login"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex h-10 px-6 items-center justify-center rounded-full bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
-        >
-          Try the demo
-        </a>
+        <div className="hidden md:flex items-center gap-2">
+          <a
+            href="https://demo.graffs.io/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-10 px-6 items-center justify-center rounded-full bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
+          >
+            Try the demo
+          </a>
+          <a
+            href="https://dataq.graffs.io/admin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-foreground/15 text-foreground hover:bg-foreground/5 transition-colors cursor-pointer"
+            title="Data Questionnaire"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
+              <rect x="9" y="3" width="6" height="4" rx="1" />
+              <path d="M9 12h6" />
+              <path d="M9 16h6" />
+            </svg>
+          </a>
+        </div>
 
         <button
           className="md:hidden p-2 cursor-pointer"
@@ -68,7 +84,7 @@ export function Header() {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden border-t border-border/40 bg-background px-6 py-5">
+        <div className="md:hidden border-t border-border/40 bg-background px-6 py-5 space-y-3">
           <a
             href="https://demo.graffs.io/login"
             target="_blank"
@@ -76,6 +92,20 @@ export function Header() {
             className="flex w-full h-11 items-center justify-center rounded-full bg-foreground text-background text-sm font-medium cursor-pointer"
           >
             Try the demo
+          </a>
+          <a
+            href="https://dataq.graffs.io/admin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-full h-11 items-center justify-center gap-2 rounded-full border border-foreground/15 text-foreground text-sm font-medium hover:bg-foreground/5 transition-colors cursor-pointer"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
+              <rect x="9" y="3" width="6" height="4" rx="1" />
+              <path d="M9 12h6" />
+              <path d="M9 16h6" />
+            </svg>
+            Data Questionnaire
           </a>
         </div>
       )}
