@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { KeynoteSplash } from "./keynote-splash"
 
 function GraffsLogo({ size = 24, className = "" }: { size?: number; className?: string }) {
   return (
@@ -24,6 +25,7 @@ function GraffsLogo({ size = 24, className = "" }: { size?: number; className?: 
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [keynoteOpen, setKeynoteOpen] = useState(false)
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-foreground/[0.04]">
@@ -59,6 +61,15 @@ export function Header() {
               <path d="M9 16h6" />
             </svg>
           </a>
+          <button
+            onClick={() => setKeynoteOpen(true)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-foreground/15 text-foreground hover:bg-foreground/5 transition-colors cursor-pointer"
+            title="CEO Keynote"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="6,3 20,12 6,21" />
+            </svg>
+          </button>
         </div>
 
         <button
@@ -107,8 +118,19 @@ export function Header() {
             </svg>
             Data Questionnaire
           </a>
+          <button
+            onClick={() => { setKeynoteOpen(true); setMenuOpen(false) }}
+            className="flex w-full h-11 items-center justify-center gap-2 rounded-full border border-foreground/15 text-foreground text-sm font-medium hover:bg-foreground/5 transition-colors cursor-pointer"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="6,3 20,12 6,21" />
+            </svg>
+            CEO Keynote
+          </button>
         </div>
       )}
+
+      {keynoteOpen && <KeynoteSplash onClose={() => setKeynoteOpen(false)} />}
     </header>
   )
 }

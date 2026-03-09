@@ -198,3 +198,67 @@
 .animate-blink {
   animation: blink 0.8s ease-in-out infinite;
 }
+
+/* Keynote splash animations */
+@keyframes keynote-fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes keynote-fade-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-10px); }
+}
+
+@keyframes keynote-keyword-reveal {
+  0% { opacity: 0; transform: scale(0.92); filter: blur(8px); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+@keyframes keynote-keyword-exit {
+  0% { opacity: 1; transform: scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: scale(1.04); filter: blur(6px); }
+}
+
+@keyframes keynote-scale-in {
+  0% { opacity: 0; transform: scale(0.82); filter: blur(12px); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+@keyframes keynote-image-reveal {
+  from { opacity: 0; transform: scale(0.96) translateY(30px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes keynote-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.animate-keynote-fade-in {
+  animation: keynote-fade-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-keynote-keyword-reveal {
+  animation: keynote-keyword-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-keynote-keyword-exit {
+  animation: keynote-keyword-exit 0.4s ease-in forwards;
+}
+
+.animate-keynote-scale-in {
+  animation: keynote-scale-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-keynote-image-reveal {
+  animation: keynote-image-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.keynote-stagger-1 { animation-delay: 0.1s; }
+.keynote-stagger-2 { animation-delay: 0.25s; }
+.keynote-stagger-3 { animation-delay: 0.4s; }
+.keynote-stagger-4 { animation-delay: 0.55s; }
+.keynote-stagger-5 { animation-delay: 0.7s; }
+.keynote-stagger-6 { animation-delay: 0.85s; }
