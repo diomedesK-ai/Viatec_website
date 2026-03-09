@@ -4,9 +4,13 @@ import { useState, useEffect, useCallback, useRef, forwardRef, type ReactNode } 
 import { createPortal } from "react-dom"
 import Image from "next/image"
 
-function ImageFrame({ children, className = "" }: { children: ReactNode; className?: string }) {
+function ImageFrame({ children, className = "", light = false }: { children: ReactNode; className?: string; light?: boolean }) {
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative rounded-3xl overflow-hidden ${
+      light
+        ? "shadow-[0_80px_160px_-40px_rgba(0,0,0,0.22)]"
+        : "shadow-[0_60px_140px_-30px_rgba(255,255,255,0.08)]"
+    } ${className}`}>
       {children}
     </div>
   )
@@ -14,11 +18,10 @@ function ImageFrame({ children, className = "" }: { children: ReactNode; classNa
 
 const KEYWORDS = [
   "Data Silos",
-  "Blind Spots",
-  "Manual Reporting",
-  "Zero Traceability",
-  "No Real-Time Visibility",
   "Disconnected Systems",
+  "Manual Reporting",
+  "Limited Traceability",
+  "Invisible Trends",
 ]
 
 const CHALLENGES = [
@@ -293,6 +296,12 @@ function SlideTitleCard() {
       >
         AI-powered fleet electrification analytics
       </p>
+      <p
+        className="mt-6 text-[11px] text-white/20 font-light tracking-wide animate-keynote-fade-in keynote-stagger-5"
+        style={{ opacity: 0 }}
+      >
+        All customer names, fleet data, and figures shown are fictitious and for demonstration purposes only.
+      </p>
     </div>
   )
 }
@@ -315,17 +324,18 @@ function SlideKeyword({ word }: { word: string }) {
 function SlideChallenges() {
   return (
     <div className="max-w-4xl mx-auto px-6">
-      <p
-        className="text-sm tracking-[0.3em] uppercase text-white/25 mb-14 text-center animate-keynote-fade-in"
+      <h2
+        className="text-2xl md:text-4xl font-semibold tracking-[-0.02em] text-white/80 mb-20 text-center animate-keynote-fade-in"
+        style={{ textShadow: "0 0 60px rgba(255,255,255,0.1)" }}
       >
         Every role. Same frustration.
-      </p>
+      </h2>
       <div className="space-y-9">
         {CHALLENGES.map((item, i) => (
           <div
             key={i}
             className="animate-keynote-fade-in"
-            style={{ opacity: 0, animationDelay: `${0.3 + i * 0.5}s` }}
+            style={{ opacity: 0, animationDelay: `${1.2 + i * 0.5}s` }}
           >
             <span className="text-xs tracking-[0.25em] uppercase text-white/30 mb-2 block">
               {item.role}
@@ -387,16 +397,16 @@ function SlideHereComesAI() {
         Here comes AI.
       </h2>
       {showImage && (
-        <ImageFrame className="mt-10 animate-keynote-image-reveal">
+        <div className="mt-10 animate-keynote-image-reveal">
           <Image
             src="/keynote/wf-intelligence-ai.png"
             alt="WorkForce Intelligence AI"
-            width={1400}
-            height={700}
+            width={1600}
+            height={800}
             className="w-full h-auto block"
             priority
           />
-        </ImageFrame>
+        </div>
       )}
     </div>
   )
@@ -404,12 +414,12 @@ function SlideHereComesAI() {
 
 function SlideEverywhere() {
   return (
-    <div className="text-center px-6 max-w-[1200px] mx-auto">
+    <div className="text-center px-4 max-w-[1400px] mx-auto">
       <p className="text-sm tracking-[0.3em] uppercase text-black/30 mb-4 animate-keynote-fade-in">
         Delivered Everywhere
       </p>
       <h2
-        className="text-3xl md:text-5xl font-medium tracking-[-0.03em] text-black mb-4 animate-keynote-fade-in keynote-stagger-1"
+        className="text-4xl md:text-6xl font-semibold tracking-[-0.04em] text-black mb-4 animate-keynote-fade-in keynote-stagger-1"
         style={{ opacity: 0 }}
       >
         WhatsApp. Teams. Your App.
@@ -417,16 +427,16 @@ function SlideEverywhere() {
       <p className="text-lg text-black/40 font-normal mb-8 animate-keynote-fade-in keynote-stagger-2" style={{ opacity: 0 }}>
         Same AI, same data, same governance.
       </p>
-      <ImageFrame className="animate-keynote-image-reveal keynote-stagger-3">
+      <div className="animate-keynote-image-reveal keynote-stagger-3">
         <Image
           src="/keynote/ai-whatsapp.png"
           alt="Fleet Intelligence on WhatsApp"
-          width={1400}
-          height={700}
+          width={1600}
+          height={800}
           className="w-full h-auto block"
           priority
         />
-      </ImageFrame>
+      </div>
     </div>
   )
 }
@@ -461,7 +471,7 @@ const SlideVideo = forwardRef<HTMLVideoElement>(function SlideVideo(_, ref) {
   return (
     <div className="text-center px-6 max-w-[1200px] mx-auto">
       <p className="text-sm tracking-[0.3em] uppercase text-black/30 mb-4 animate-keynote-fade-in">
-        Live Demo
+        Recorded from the Actual Platform
       </p>
       <h2
         className="text-3xl md:text-5xl font-medium tracking-[-0.03em] text-black mb-8 animate-keynote-fade-in keynote-stagger-1"
@@ -499,7 +509,7 @@ function SlideCTA() {
         className="inline-flex mt-12 h-14 px-10 items-center justify-center rounded-full bg-black text-white text-base font-medium hover:bg-black/85 transition-all animate-keynote-fade-in keynote-stagger-3 cursor-pointer"
         style={{ opacity: 0 }}
       >
-        Try the demo
+        Try the platform
       </a>
     </div>
   )
