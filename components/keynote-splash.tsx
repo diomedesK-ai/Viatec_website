@@ -4,15 +4,9 @@ import { useState, useEffect, useCallback, useRef, forwardRef, type ReactNode } 
 import { createPortal } from "react-dom"
 import Image from "next/image"
 
-function ImageFrame({ children, className = "", light = false }: { children: ReactNode; className?: string; light?: boolean }) {
+function ImageFrame({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <div
-      className={`relative rounded-2xl md:rounded-3xl overflow-hidden ${
-        light
-          ? "shadow-[0_60px_140px_-30px_rgba(0,0,0,0.2)]"
-          : "shadow-[0_60px_140px_-30px_rgba(255,255,255,0.07)]"
-      } ${className}`}
-    >
+    <div className={`relative ${className}`}>
       {children}
     </div>
   )
@@ -33,12 +27,6 @@ const CHALLENGES = [
   { role: "Operations Lead", question: "Why won't my crews adopt the technology?" },
   { role: "Service Manager", question: "Why do I need five dashboards to get one answer?" },
   { role: "ESG Manager", question: "How do I turn sustainability into a number the board believes?" },
-]
-
-const RESULT_IMAGES = [
-  { src: "/keynote/perf-comparison.jpg", caption: "Performance Comparison — SouthWest Energy" },
-  { src: "/keynote/dynamic-dashboard.jpg", caption: "Dynamic Dashboards with AI Insights" },
-  { src: "/keynote/tco.png", caption: "Total Cost of Ownership Calculator" },
 ]
 
 // Slide indices: 0=title, 1..6=keywords, 7=challenges, 8=old world, 9=here comes AI, 10=everywhere, 11=results, 12=video, 13=CTA
@@ -373,7 +361,7 @@ function SlideOldWorld() {
           alt="Legacy analytics dashboard"
           width={1400}
           height={700}
-          className="w-full h-auto block rounded-2xl md:rounded-3xl"
+          className="w-full h-auto block"
           priority
         />
       </ImageFrame>
@@ -399,13 +387,13 @@ function SlideHereComesAI() {
         Here comes AI.
       </h2>
       {showImage && (
-        <ImageFrame light className="mt-10 animate-keynote-image-reveal">
+        <ImageFrame className="mt-10 animate-keynote-image-reveal">
           <Image
             src="/keynote/wf-intelligence-ai.png"
             alt="WorkForce Intelligence AI"
             width={1400}
             height={700}
-            className="w-full h-auto block rounded-2xl md:rounded-3xl"
+            className="w-full h-auto block"
             priority
           />
         </ImageFrame>
@@ -429,13 +417,13 @@ function SlideEverywhere() {
       <p className="text-lg text-black/40 font-normal mb-8 animate-keynote-fade-in keynote-stagger-2" style={{ opacity: 0 }}>
         Same AI, same data, same governance.
       </p>
-      <ImageFrame light className="animate-keynote-image-reveal keynote-stagger-3">
+      <ImageFrame className="animate-keynote-image-reveal keynote-stagger-3">
         <Image
           src="/keynote/ai-whatsapp.png"
           alt="Fleet Intelligence on WhatsApp"
           width={1400}
           height={700}
-          className="w-full h-auto block rounded-2xl md:rounded-3xl"
+          className="w-full h-auto block"
           priority
         />
       </ImageFrame>
@@ -444,56 +432,26 @@ function SlideEverywhere() {
 }
 
 function SlideResults() {
-  const [activeImg, setActiveImg] = useState(0)
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveImg((i) => (i + 1) % RESULT_IMAGES.length)
-    }, 5000)
-    return () => clearInterval(timer)
-  }, [])
-
   return (
     <div className="text-center px-6 max-w-[1200px] mx-auto">
       <p className="text-sm tracking-[0.3em] uppercase text-black/30 mb-4 animate-keynote-fade-in">
-        The Results
+        Intelligence in Action
       </p>
       <h2
         className="text-3xl md:text-5xl font-medium tracking-[-0.03em] text-black mb-8 animate-keynote-fade-in keynote-stagger-1"
         style={{ opacity: 0 }}
       >
-        Intelligence in action.
+        Fleet Performance Comparison
       </h2>
-      <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_60px_140px_-30px_rgba(0,0,0,0.2)] aspect-[16/9] animate-keynote-image-reveal keynote-stagger-2">
-        {RESULT_IMAGES.map((img, i) => (
-          <Image
-            key={img.src}
-            src={img.src}
-            alt={img.caption}
-            width={1400}
-            height={788}
-            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ease-in-out"
-            style={{ opacity: i === activeImg ? 1 : 0 }}
-            priority={i === 0}
-            draggable={false}
-          />
-        ))}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none rounded-2xl md:rounded-3xl" />
-        <p className="absolute bottom-6 left-0 right-0 text-sm text-white/70 font-normal z-10 transition-opacity duration-500">
-          {RESULT_IMAGES[activeImg].caption}
-        </p>
-        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-          {RESULT_IMAGES.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveImg(i)}
-              aria-label={`View ${RESULT_IMAGES[i].caption}`}
-              className={`w-2 h-2 rounded-full transition-all duration-500 cursor-pointer ${
-                i === activeImg ? "bg-white/80 scale-110" : "bg-white/30 hover:bg-white/50"
-              }`}
-            />
-          ))}
-        </div>
+      <div className="animate-keynote-image-reveal keynote-stagger-2 rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_60px_140px_-30px_rgba(0,0,0,0.2)]">
+        <video
+          src="/keynote/fleet-sw-vs-canada.mp4"
+          controls
+          autoPlay
+          muted
+          playsInline
+          className="w-full h-auto block"
+        />
       </div>
     </div>
   )
@@ -517,8 +475,9 @@ const SlideVideo = forwardRef<HTMLVideoElement>(function SlideVideo(_, ref) {
           src="/keynote/tco-demo.mp4"
           controls
           autoPlay
+          muted
           playsInline
-          className="w-full h-auto block rounded-2xl md:rounded-3xl"
+          className="w-full h-auto block"
         />
       </div>
     </div>
