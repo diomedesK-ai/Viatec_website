@@ -203,18 +203,18 @@ const LAYERS = [
     details: [
       { icon: <IconFile />, title: "Documents & Files", desc: "PDFs, manuals, specs, reports" },
       { icon: <IconDb s={20} />, title: "Any Database", desc: "SQL, NoSQL, time-series, graph" },
-      { icon: <IconServer />, title: "Enterprise Systems", desc: "ERPs, SCADA, CMMS, GIS, OEM portals" },
-      { icon: <IconPulse />, title: "IoT & Telemetry", desc: "Sensors, telematics, real-time streams" },
+      { icon: <IconServer />, title: "Enterprise Systems", desc: "ERPs, MES, LIMS, CRMs — any platform" },
+      { icon: <IconPulse />, title: "IoT & Telemetry", desc: "Sensors, devices, real-time data streams" },
     ],
   },
   {
     label: "Industry-Specific Knowledge",
-    tagline: "Domain ontologies, asset taxonomies, operational context.",
+    tagline: "Domain ontologies, taxonomies, operational context.",
     accent: "#7a9e8a",
     cardIcon: <IconNetwork s={32} />,
     detailIcon: <IconNetwork s={18} />,
     details: [
-      { icon: <IconTree />, title: "Asset Taxonomies", desc: "Equipment hierarchies & relationships" },
+      { icon: <IconTree />, title: "Domain Taxonomies", desc: "Process, product & entity hierarchies" },
       { icon: <IconNetwork s={20} />, title: "Domain Ontologies", desc: "Industry-specific knowledge models" },
       { icon: <IconCompass />, title: "Operational Context", desc: "Rules, thresholds, constraints" },
       { icon: <IconSparkle />, title: "Auto-Structured", desc: "ML-driven schema & entity mapping" },
@@ -228,7 +228,7 @@ const LAYERS = [
     detailIcon: <IconAgent s={18} />,
     details: [
       { icon: <IconEye />, title: "Pattern Detection", desc: "Signal analysis & anomaly scoring" },
-      { icon: <IconBolt />, title: "Autonomous Actions", desc: "Work orders, alerts, dispatch" },
+      { icon: <IconBolt />, title: "Autonomous Actions", desc: "Alerts, actions, escalations, approvals" },
       { icon: <IconLayers />, title: "Multi-LLM Orchestration", desc: "Claude, GPT, Mistral auto-fallback" },
       { icon: <IconShieldPlain />, title: "Self-Healing", desc: "Auto-recovery & error correction" },
     ],
