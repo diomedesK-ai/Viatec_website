@@ -191,15 +191,33 @@ function IconMessage() {
   )
 }
 
+function IconChevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="transition-transform duration-400"
+      style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
+    >
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
+  )
+}
+
 /* ─── Layer Data ─── */
 
 const LAYERS = [
   {
-    label: "Flexible Data Lakehouse",
+    label: "Connected Data Foundation",
     tagline: "Any document. Any database. Any system.",
     accent: "#8896ab",
-    cardIcon: <IconDb s={32} />,
-    detailIcon: <IconDb s={18} />,
+    cardIcon: <IconDb s={28} />,
     details: [
       { icon: <IconFile />, title: "Documents & Files", desc: "PDFs, manuals, specs, reports" },
       { icon: <IconDb s={20} />, title: "Any Database", desc: "SQL, NoSQL, time-series, graph" },
@@ -208,11 +226,10 @@ const LAYERS = [
     ],
   },
   {
-    label: "Industry-Specific Knowledge",
+    label: "Industry Knowledge",
     tagline: "Domain ontologies, taxonomies, operational context.",
     accent: "#7a9e8a",
-    cardIcon: <IconNetwork s={32} />,
-    detailIcon: <IconNetwork s={18} />,
+    cardIcon: <IconNetwork s={28} />,
     details: [
       { icon: <IconTree />, title: "Domain Taxonomies", desc: "Process, product & entity hierarchies" },
       { icon: <IconNetwork s={20} />, title: "Domain Ontologies", desc: "Industry-specific knowledge models" },
@@ -221,11 +238,10 @@ const LAYERS = [
     ],
   },
   {
-    label: "Agentic Workforce & Workflows",
+    label: "Intelligent Workforce & Workflows",
     tagline: "Autonomous agents that detect, decide, and act.",
     accent: "#b8a07a",
-    cardIcon: <IconAgent s={32} />,
-    detailIcon: <IconAgent s={18} />,
+    cardIcon: <IconAgent s={28} />,
     details: [
       { icon: <IconEye />, title: "Pattern Detection", desc: "Signal analysis & anomaly scoring" },
       { icon: <IconBolt />, title: "Autonomous Actions", desc: "Alerts, actions, escalations, approvals" },
@@ -237,8 +253,7 @@ const LAYERS = [
     label: "Just-in-Time Intelligence & Experience",
     tagline: "Dashboards, voice, text, images — any channel.",
     accent: "#9f8eb8",
-    cardIcon: <IconDashboard s={32} />,
-    detailIcon: <IconDashboard s={18} />,
+    cardIcon: <IconDashboard s={28} />,
     details: [
       { icon: <IconChart />, title: "Dynamic Dashboards", desc: "Real-time analytics & visualizations" },
       { icon: <IconMic />, title: "Voice & Text", desc: "Natural language & speech queries" },
@@ -268,9 +283,9 @@ export function PlatformAnatomy() {
         </p>
       </div>
 
-      <div className="max-w-[1100px] mx-auto px-6">
+      <div className="max-w-[900px] mx-auto px-6">
         {/* Security / Guardrails ring */}
-        <div className="relative rounded-[2rem] border border-foreground/[0.12] p-5 md:p-8 lg:p-10 platform-security-ring">
+        <div className="relative rounded-[2rem] border border-foreground/[0.12] p-5 md:p-8 platform-security-ring">
           {/* Top label */}
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-background px-4">
             <span className="text-muted-foreground/70"><IconShield s={13} /></span>
@@ -280,112 +295,83 @@ export function PlatformAnatomy() {
             <span className="text-muted-foreground/70"><IconShield s={13} /></span>
           </div>
 
-          {/* Layer cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+          {/* Vertical layer stack */}
+          <div className="space-y-3">
             {LAYERS.map((layer, i) => {
               const isActive = active === i
-              const hasActive = active !== null
               return (
-                <button
-                  key={i}
-                  onClick={() => setActive(isActive ? null : i)}
-                  className="relative group text-left rounded-2xl cursor-pointer outline-none overflow-hidden border border-foreground/[0.06] bg-foreground/[0.02] hover:bg-foreground/[0.04]"
-                  style={{
-                    transform: isActive
-                      ? "translateY(-6px)"
-                      : hasActive
-                        ? "scale(0.98)"
-                        : "translateY(0)",
-                    boxShadow: isActive
-                      ? `0 12px 40px -8px rgba(0,0,0,0.08), 0 0 0 1px ${layer.accent}30`
-                      : "0 1px 3px 0 rgba(0,0,0,0.02)",
-                    opacity: hasActive && !isActive ? 0.45 : 1,
-                    transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-                  }}
-                >
-                  {/* Accent top line */}
-                  <div
-                    className="absolute top-0 inset-x-0 h-[2px]"
+                <div key={i} className="rounded-xl overflow-hidden">
+                  <button
+                    onClick={() => setActive(isActive ? null : i)}
+                    className="w-full text-left cursor-pointer outline-none rounded-xl border bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-all duration-400"
                     style={{
-                      background: layer.accent,
-                      opacity: isActive ? 0.7 : 0.25,
-                      transition: "opacity 0.5s ease",
+                      borderColor: isActive ? `${layer.accent}35` : "var(--border)",
+                      borderLeftWidth: "3px",
+                      borderLeftColor: isActive ? layer.accent : `${layer.accent}40`,
+                      boxShadow: isActive
+                        ? "0 8px 30px -8px rgba(0,0,0,0.06)"
+                        : "none",
+                      transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
                     }}
-                  />
+                  >
+                    <div className="flex items-center gap-4 md:gap-5 p-4 md:p-5">
+                      <div
+                        className="flex-shrink-0 transition-opacity duration-300"
+                        style={{
+                          color: layer.accent,
+                          opacity: isActive ? 0.9 : 0.5,
+                        }}
+                      >
+                        {layer.cardIcon}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-[15px] md:text-base tracking-[-0.01em]">
+                          {layer.label}
+                        </h3>
+                        <p className="text-muted-foreground text-sm mt-0.5 leading-relaxed">
+                          {layer.tagline}
+                        </p>
+                      </div>
+                      <div className="flex-shrink-0 text-muted-foreground/40">
+                        <IconChevron open={isActive} />
+                      </div>
+                    </div>
 
-                  <div className="p-5 md:p-6 flex flex-col justify-between" style={{ minHeight: "200px" }}>
-                    <div
-                      className="transition-opacity duration-300 opacity-50 group-hover:opacity-75"
-                      style={{ color: layer.accent }}
-                    >
-                      {layer.cardIcon}
-                    </div>
-                    <div className="mt-8">
-                      <h3 className="font-semibold text-base md:text-lg leading-snug mb-1.5 tracking-[-0.01em]">
-                        {layer.label}
-                      </h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {layer.tagline}
-                      </p>
-                    </div>
-                  </div>
-                </button>
+                    {/* Detail panel (accordion) */}
+                    {isActive && (
+                      <div
+                        className="px-4 md:px-5 pb-4 md:pb-5 animate-platform-detail-in"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 pt-1">
+                          {layer.details.map((detail, j) => (
+                            <div
+                              key={j}
+                              className="flex items-start gap-2.5 p-3 rounded-lg bg-foreground/[0.025] border border-foreground/[0.04] animate-platform-item-in"
+                              style={{ animationDelay: `${j * 60}ms` }}
+                            >
+                              <div
+                                className="flex-shrink-0 mt-0.5 opacity-65"
+                                style={{ color: layer.accent }}
+                              >
+                                {detail.icon}
+                              </div>
+                              <div>
+                                <p className="font-medium text-sm leading-snug">{detail.title}</p>
+                                <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                                  {detail.desc}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </button>
+                </div>
               )
             })}
           </div>
-
-          {/* Expanded detail panel */}
-          {active !== null && (
-            <div
-              key={active}
-              className="mt-6 md:mt-8 rounded-2xl border border-foreground/[0.06] bg-foreground/[0.02] animate-platform-detail-in"
-            >
-              <div className="p-5 md:p-7">
-                <div className="flex items-center gap-3 mb-5">
-                  <div
-                    className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{
-                      backgroundColor: `${LAYERS[active].accent}15`,
-                      color: LAYERS[active].accent,
-                    }}
-                  >
-                    {LAYERS[active].detailIcon}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold tracking-[-0.01em]">
-                      {LAYERS[active].label}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {LAYERS[active].tagline}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                  {LAYERS[active].details.map((detail, j) => (
-                    <div
-                      key={j}
-                      className="flex items-start gap-3 p-3.5 rounded-xl border border-foreground/[0.04] bg-foreground/[0.015] hover:bg-foreground/[0.04] transition-colors animate-platform-item-in"
-                      style={{ animationDelay: `${j * 70}ms` }}
-                    >
-                      <div
-                        className="flex-shrink-0 mt-0.5 opacity-70"
-                        style={{ color: LAYERS[active].accent }}
-                      >
-                        {detail.icon}
-                      </div>
-                      <div>
-                        <p className="font-medium text-sm">{detail.title}</p>
-                        <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
-                          {detail.desc}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
 
           {/* Corner shields */}
           <div className="absolute -bottom-2.5 left-8 text-muted-foreground/35">
