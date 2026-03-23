@@ -191,6 +191,34 @@ function IconMessage() {
   )
 }
 
+function IconUser({ s = 24 }: { s?: number }) {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  )
+}
+
+function IconRefresh() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="23 4 23 10 17 10" />
+      <polyline points="1 20 1 14 7 14" />
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+    </svg>
+  )
+}
+
+function IconCheckCircle() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+  )
+}
+
 function IconChevron({ open }: { open: boolean }) {
   return (
     <svg
@@ -202,15 +230,17 @@ function IconChevron({ open }: { open: boolean }) {
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="transition-transform duration-400"
-      style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
+      style={{
+        transform: open ? "rotate(180deg)" : "rotate(0deg)",
+        transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+      }}
     >
       <polyline points="6 9 12 15 18 9" />
     </svg>
   )
 }
 
-/* ─── Layer Data ─── */
+/* ─── 4 Layer Bars ─── */
 
 const LAYERS = [
   {
@@ -238,8 +268,8 @@ const LAYERS = [
     ],
   },
   {
-    label: "Intelligent Workforce & Workflows",
-    tagline: "Autonomous agents that detect, decide, and act.",
+    label: "Autonomous Specialized Agents",
+    tagline: "Purpose-built agents that detect, decide, and act.",
     accent: "#b8a07a",
     cardIcon: <IconAgent s={28} />,
     details: [
@@ -250,7 +280,7 @@ const LAYERS = [
     ],
   },
   {
-    label: "Just-in-Time Intelligence & Experience",
+    label: "Just-in-Time Intelligence Anywhere",
     tagline: "Dashboards, voice, text, images — any channel.",
     accent: "#9f8eb8",
     cardIcon: <IconDashboard s={28} />,
@@ -261,6 +291,17 @@ const LAYERS = [
       { icon: <IconMessage />, title: "Any Channel", desc: "WhatsApp, Teams, apps, embedded" },
     ],
   },
+]
+
+/* ─── Vertical side panel items ─── */
+
+const SIDE_ACCENT = "#8a8a8a"
+
+const EXPERIENCE_ITEMS = [
+  { icon: <IconUser s={20} />, label: "Intuitive Interfaces" },
+  { icon: <IconCheckCircle />, label: "Human Oversight" },
+  { icon: <IconRefresh />, label: "Feedback Loops" },
+  { icon: <IconMessage />, label: "Contextual Interaction" },
 ]
 
 /* ─── Component ─── */
@@ -283,7 +324,7 @@ export function PlatformAnatomy() {
         </p>
       </div>
 
-      <div className="max-w-[900px] mx-auto px-6">
+      <div className="max-w-[1050px] mx-auto px-6">
         {/* Security / Guardrails ring */}
         <div className="relative rounded-[2rem] border border-foreground/[0.12] p-5 md:p-8 platform-security-ring">
           {/* Top label */}
@@ -295,82 +336,119 @@ export function PlatformAnatomy() {
             <span className="text-muted-foreground/70"><IconShield s={13} /></span>
           </div>
 
-          {/* Vertical layer stack */}
-          <div className="space-y-3">
-            {LAYERS.map((layer, i) => {
-              const isActive = active === i
-              return (
-                <div key={i} className="rounded-xl overflow-hidden">
-                  <button
-                    onClick={() => setActive(isActive ? null : i)}
-                    className="w-full text-left cursor-pointer outline-none rounded-xl border bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-all duration-400"
-                    style={{
-                      borderColor: isActive ? `${layer.accent}35` : "var(--border)",
-                      borderLeftWidth: "3px",
-                      borderLeftColor: isActive ? layer.accent : `${layer.accent}40`,
-                      boxShadow: isActive
-                        ? "0 8px 30px -8px rgba(0,0,0,0.06)"
-                        : "none",
-                      transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-                    }}
-                  >
-                    <div className="flex items-center gap-4 md:gap-5 p-4 md:p-5">
-                      <div
-                        className="flex-shrink-0 transition-opacity duration-300"
-                        style={{
-                          color: layer.accent,
-                          opacity: isActive ? 0.9 : 0.5,
-                        }}
-                      >
-                        {layer.cardIcon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-[15px] md:text-base tracking-[-0.01em]">
-                          {layer.label}
-                        </h3>
-                        <p className="text-muted-foreground text-sm mt-0.5 leading-relaxed">
-                          {layer.tagline}
-                        </p>
-                      </div>
-                      <div className="flex-shrink-0 text-muted-foreground/40">
-                        <IconChevron open={isActive} />
-                      </div>
-                    </div>
-
-                    {/* Detail panel (accordion) */}
-                    {isActive && (
-                      <div
-                        className="px-4 md:px-5 pb-4 md:pb-5 animate-platform-detail-in"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 pt-1">
-                          {layer.details.map((detail, j) => (
-                            <div
-                              key={j}
-                              className="flex items-start gap-2.5 p-3 rounded-lg bg-foreground/[0.025] border border-foreground/[0.04] animate-platform-item-in"
-                              style={{ animationDelay: `${j * 60}ms` }}
-                            >
-                              <div
-                                className="flex-shrink-0 mt-0.5 opacity-65"
-                                style={{ color: layer.accent }}
-                              >
-                                {detail.icon}
-                              </div>
-                              <div>
-                                <p className="font-medium text-sm leading-snug">{detail.title}</p>
-                                <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
-                                  {detail.desc}
-                                </p>
-                              </div>
-                            </div>
-                          ))}
+          {/* Main layout: 4 bars + vertical side panel */}
+          <div className="flex flex-col lg:flex-row gap-3 md:gap-4">
+            {/* Left: 4 accordion layer bars */}
+            <div className="flex-1 space-y-3 min-w-0">
+              {LAYERS.map((layer, i) => {
+                const isActive = active === i
+                return (
+                  <div key={i}>
+                    <button
+                      onClick={() => setActive(isActive ? null : i)}
+                      className="w-full text-left cursor-pointer outline-none rounded-xl border bg-foreground/[0.02] hover:bg-foreground/[0.04]"
+                      style={{
+                        borderColor: isActive ? `${layer.accent}35` : "var(--border)",
+                        borderLeftWidth: "3px",
+                        borderLeftColor: isActive ? layer.accent : `${layer.accent}40`,
+                        boxShadow: isActive ? "0 8px 30px -8px rgba(0,0,0,0.06)" : "none",
+                        transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                      }}
+                    >
+                      <div className="flex items-center gap-4 md:gap-5 p-4 md:p-5">
+                        <div
+                          className="flex-shrink-0"
+                          style={{
+                            color: layer.accent,
+                            opacity: isActive ? 0.9 : 0.5,
+                            transition: "opacity 0.3s ease",
+                          }}
+                        >
+                          {layer.cardIcon}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-[15px] md:text-base tracking-[-0.01em]">
+                            {layer.label}
+                          </h3>
+                          <p className="text-muted-foreground text-sm mt-0.5 leading-relaxed">
+                            {layer.tagline}
+                          </p>
+                        </div>
+                        <div className="flex-shrink-0 text-muted-foreground/40">
+                          <IconChevron open={isActive} />
                         </div>
                       </div>
-                    )}
-                  </button>
+
+                      {isActive && (
+                        <div
+                          className="px-4 md:px-5 pb-4 md:pb-5 animate-platform-detail-in"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                            {layer.details.map((detail, j) => (
+                              <div
+                                key={j}
+                                className="flex items-start gap-2.5 p-3 rounded-lg bg-foreground/[0.025] border border-foreground/[0.04] animate-platform-item-in"
+                                style={{ animationDelay: `${j * 60}ms` }}
+                              >
+                                <div
+                                  className="flex-shrink-0 mt-0.5 opacity-65"
+                                  style={{ color: layer.accent }}
+                                >
+                                  {detail.icon}
+                                </div>
+                                <div>
+                                  <p className="font-medium text-sm leading-snug">{detail.title}</p>
+                                  <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                                    {detail.desc}
+                                  </p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </button>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Right: User Experience & Human-in-the-Loop — vertical side panel */}
+            <div
+              className="lg:w-[200px] flex-shrink-0 rounded-xl border border-foreground/[0.08] bg-foreground/[0.015]"
+              style={{
+                borderLeftWidth: "3px",
+                borderLeftColor: `${SIDE_ACCENT}50`,
+              }}
+            >
+              <div className="p-5 flex flex-row lg:flex-col items-start gap-5 lg:gap-0 h-full">
+                <div className="lg:mb-auto lg:pt-2">
+                  <div className="mb-2.5 opacity-50" style={{ color: SIDE_ACCENT }}>
+                    <IconUser s={26} />
+                  </div>
+                  <h3 className="font-semibold text-[14px] tracking-[-0.01em] leading-snug">
+                    User Experience
+                  </h3>
+                  <p className="text-muted-foreground text-[13px] mt-0.5 leading-snug">
+                    Human-in-the-Loop
+                  </p>
                 </div>
-              )
-            })}
+
+                <div className="flex flex-row lg:flex-col gap-3 lg:gap-3.5 flex-wrap lg:mb-auto">
+                  {EXPERIENCE_ITEMS.map((item, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <div className="opacity-40" style={{ color: SIDE_ACCENT }}>
+                        {item.icon}
+                      </div>
+                      <span className="text-[13px] text-muted-foreground whitespace-nowrap">
+                        {item.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Corner shields */}
