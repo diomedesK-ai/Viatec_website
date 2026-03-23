@@ -262,3 +262,32 @@
 .keynote-stagger-4 { animation-delay: 0.55s; }
 .keynote-stagger-5 { animation-delay: 0.7s; }
 .keynote-stagger-6 { animation-delay: 0.85s; }
+
+/* Platform layer architecture */
+@keyframes platform-detail-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes platform-item-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes platform-security-glow {
+  0%, 100% { box-shadow: 0 0 20px 0 rgba(128,128,128,0.02), inset 0 0 20px 0 rgba(128,128,128,0.01); }
+  50% { box-shadow: 0 0 40px 0 rgba(128,128,128,0.04), inset 0 0 30px 0 rgba(128,128,128,0.02); }
+}
+
+.animate-platform-detail-in {
+  animation: platform-detail-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-platform-item-in {
+  opacity: 0;
+  animation: platform-item-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.platform-security-ring {
+  animation: platform-security-glow 5s ease-in-out infinite;
+}
