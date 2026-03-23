@@ -270,14 +270,14 @@ export function PlatformAnatomy() {
 
       <div className="max-w-[1100px] mx-auto px-6">
         {/* Security / Guardrails ring */}
-        <div className="relative rounded-[2rem] border border-foreground/[0.06] p-5 md:p-8 lg:p-10 platform-security-ring">
+        <div className="relative rounded-[2rem] border border-foreground/[0.12] p-5 md:p-8 lg:p-10 platform-security-ring">
           {/* Top label */}
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-background px-4">
-            <span className="text-muted-foreground/50"><IconShield s={13} /></span>
-            <span className="text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-muted-foreground/60 whitespace-nowrap font-medium">
+            <span className="text-muted-foreground/70"><IconShield s={13} /></span>
+            <span className="text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-muted-foreground/80 whitespace-nowrap font-medium">
               Security · Ethics · Compliance · Guardrails
             </span>
-            <span className="text-muted-foreground/50"><IconShield s={13} /></span>
+            <span className="text-muted-foreground/70"><IconShield s={13} /></span>
           </div>
 
           {/* Layer cards */}
@@ -388,10 +388,10 @@ export function PlatformAnatomy() {
           )}
 
           {/* Corner shields */}
-          <div className="absolute -bottom-2.5 left-8 text-muted-foreground/20">
+          <div className="absolute -bottom-2.5 left-8 text-muted-foreground/35">
             <IconShield s={12} />
           </div>
-          <div className="absolute -bottom-2.5 right-8 text-muted-foreground/20">
+          <div className="absolute -bottom-2.5 right-8 text-muted-foreground/35">
             <IconShield s={12} />
           </div>
         </div>
