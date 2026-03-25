@@ -16,8 +16,8 @@ const heroImages = [
     alt: "Advanced manufacturing and industrial automation",
   },
   {
-    src: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=2400&q=90&auto=format&fit=crop",
-    alt: "Pharmaceutical research and drug manufacturing",
+    src: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=2400&q=90&auto=format&fit=crop",
+    alt: "Industry 4.0 smart factory floor with connected production systems",
   },
   {
     src: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=2400&q=90&auto=format&fit=crop",
