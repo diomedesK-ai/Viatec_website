@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 
 /* ═══════════════════════════════════════════════════════════════════
    DATA
@@ -467,15 +467,16 @@ function AgentsModule() {
       <div className="bg-foreground text-background py-28 md:py-40">
         <div className="max-w-5xl mx-auto px-6">
           <p className="text-xs font-medium uppercase tracking-[0.22em] text-background/40 text-center mb-5">
-            Purpose-built agents
+            Extensible agent platform
           </p>
           <h2 className="text-4xl md:text-6xl font-bold tracking-[-0.04em] text-center mb-6 text-balance leading-[1.05]">
-            Nine agents. Every stage of pharma.
+            Start here. Build from here.
           </h2>
           <p className="text-center text-background/45 text-lg md:text-xl max-w-2xl mx-auto mb-16 leading-relaxed">
-            From first-in-human to post-market surveillance — each agent
-            reasons over the Knowledge Graph, validates through Critiquers,
-            and operates within Clinical Guardrails.
+            Purpose-built agents for every stage of pharma — from first-in-human
+            to post-market surveillance. Each one reasons over the Knowledge Graph,
+            validates through Critiquers, and operates within Clinical Guardrails.
+            Need something new? Spin up your own.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-background/10 rounded-3xl overflow-hidden">
@@ -489,13 +490,180 @@ function AgentsModule() {
             ))}
           </div>
 
-          <p className="mt-12 text-center text-background/50 text-sm md:text-base italic max-w-3xl mx-auto leading-relaxed">
-            Every agent is backed by a Knowledge Graph, validated by a
-            Critiquer, and governed by Clinical Guardrails.
+          {/* Extensibility strip — full-width, fades right */}
+          <div className="mt-px rounded-b-3xl bg-foreground border-t border-background/10 overflow-hidden">
+            <div className="flex items-stretch">
+              <div className="flex items-center gap-3 px-8 py-6 border-r border-background/10 flex-shrink-0">
+                <div className="w-9 h-9 rounded-xl border border-dashed border-background/25 flex items-center justify-center flex-shrink-0">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="text-background/40">
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">Build your own</p>
+                  <p className="text-background/35 text-[12px]">Same KG, same guardrails, your logic</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-5 px-8 py-6 overflow-hidden" style={{ maskImage: "linear-gradient(to right, white 0%, white 50%, transparent 100%)", WebkitMaskImage: "linear-gradient(to right, white 0%, white 50%, transparent 100%)" }}>
+                <span className="text-sm text-background/40 whitespace-nowrap">HEOR & Outcomes</span>
+                <span className="text-background/15">&middot;</span>
+                <span className="text-sm text-background/30 whitespace-nowrap">Companion Dx</span>
+                <span className="text-background/15">&middot;</span>
+                <span className="text-sm text-background/20 whitespace-nowrap">Pricing & Access</span>
+                <span className="text-background/10">&middot;</span>
+                <span className="text-sm text-background/15 whitespace-nowrap">Medical Writing</span>
+                <span className="text-background/10">&middot;</span>
+                <span className="text-sm text-background/10 whitespace-nowrap">Biomarker Strategy</span>
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-12 text-center text-background/50 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
+            Every agent — including the ones you build — is backed by the Knowledge
+            Graph, validated by Critiquers, and governed by Clinical Guardrails.
           </p>
         </div>
       </div>
     </section>
+  )
+}
+
+const ORCH_STEPS = [
+  {
+    agent: "Market Access Agent",
+    action: "Pulling formulary status across top 12 PBMs",
+    result: "7 of 12 formularies confirmed. 3 pending prior-auth pathways identified.",
+  },
+  {
+    agent: "Regulatory Intelligence",
+    action: "Cross-referencing latest FDA label update",
+    result: "New indication approved March 2026. Commercial materials need updated claims language.",
+  },
+  {
+    agent: "Supply Chain Agent",
+    action: "Checking inventory readiness for launch territories",
+    result: "Northeast distribution hub at 94% capacity. West Coast needs 2-week lead time.",
+  },
+  {
+    agent: "Medical Affairs Agent",
+    action: "Mapping KOL coverage for launch regions",
+    result: "14 KOLs identified across 8 territories. 3 gaps in Southeast — MSL assignment recommended.",
+  },
+  {
+    agent: "Knowledge Graph",
+    action: "Synthesising cross-agent findings",
+    result: "Launch readiness score: 78%. Two blockers flagged. Recommended actions generated.",
+  },
+]
+
+function OrchestrationThread() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [visibleCount, setVisibleCount] = useState(0)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          let count = 0
+          const interval = setInterval(() => {
+            count += 1
+            setVisibleCount(count)
+            if (count >= ORCH_STEPS.length + 1) clearInterval(interval)
+          }, 600)
+          observer.disconnect()
+          return () => clearInterval(interval)
+        }
+      },
+      { threshold: 0.2 }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={containerRef} className="mt-12">
+      {/* The question */}
+      <div
+        className={`transition-all duration-700 ${
+          visibleCount > 0
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4"
+        }`}
+      >
+        <div className="rounded-2xl bg-foreground text-background px-6 py-5 max-w-xl mx-auto">
+          <p className="text-[10px] uppercase tracking-[0.18em] text-background/35 font-medium mb-2">
+            Single question
+          </p>
+          <p className="text-base font-medium leading-relaxed">
+            &ldquo;What&rsquo;s our launch readiness for the new indication across North America?&rdquo;
+          </p>
+        </div>
+      </div>
+
+      {/* Thread line + steps */}
+      <div className="relative max-w-xl mx-auto">
+        {/* Vertical thread line — grows with visible steps */}
+        <div className="absolute left-6 top-0 w-px bg-foreground/[0.08] transition-all duration-700 ease-out" style={{ height: visibleCount <= 1 ? 0 : `${Math.min(((visibleCount - 1) / (ORCH_STEPS.length + 1)) * 100, 100)}%` }} />
+
+        {ORCH_STEPS.map((step, i) => (
+          <div
+            key={step.agent}
+            className={`relative pl-14 py-5 transition-all duration-700 ${
+              visibleCount > i + 1
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-6"
+            }`}
+          >
+            {/* Thread dot */}
+            <div className={`absolute left-[19px] top-[26px] w-[10px] h-[10px] rounded-full border-2 transition-colors duration-500 ${
+              visibleCount > i + 1
+                ? i === ORCH_STEPS.length - 1
+                  ? "bg-sky-500 border-sky-500"
+                  : "bg-foreground border-foreground"
+                : "bg-transparent border-foreground/20"
+            }`} />
+
+            {/* Agent label */}
+            <p className="text-[11px] uppercase tracking-[0.14em] text-foreground/40 font-semibold mb-1">
+              {step.agent}
+            </p>
+
+            {/* Action */}
+            <p className="text-sm text-foreground/55 mb-2">{step.action}</p>
+
+            {/* Result */}
+            <div className="rounded-xl bg-foreground/[0.03] px-4 py-3">
+              <p className="text-sm text-foreground/75 leading-relaxed">{step.result}</p>
+            </div>
+          </div>
+        ))}
+
+        {/* Final synthesis indicator */}
+        <div
+          className={`relative pl-14 pt-4 pb-2 transition-all duration-700 delay-200 ${
+            visibleCount > ORCH_STEPS.length
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-6"
+          }`}
+        >
+          <div className="absolute left-[15px] top-[20px] w-[18px] h-[18px] rounded-full bg-sky-50 border-2 border-sky-400 flex items-center justify-center">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-sky-500">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <p className="text-sm font-semibold text-foreground/70">
+            One question. Five agents. One synthesised answer.
+          </p>
+          <p className="text-[12px] text-foreground/40 mt-0.5">
+            No manual stitching. No copy-paste across tools. The platform orchestrates.
+          </p>
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -636,6 +804,9 @@ function CrossOrgModule() {
             </div>
           </div>
         </div>
+
+        {/* Orchestration thread animation */}
+        <OrchestrationThread />
       </div>
     </section>
   )

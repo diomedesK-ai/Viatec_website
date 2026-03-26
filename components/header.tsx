@@ -68,14 +68,6 @@ export function Header() {
 
         <div className="hidden md:flex items-center gap-2">
           <a
-            href="https://demo.graffs.io/login"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-10 px-6 items-center justify-center rounded-full bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
-          >
-            Try the demo
-          </a>
-          <a
             href="https://dataq.graffs.io/admin"
             target="_blank"
             rel="noopener noreferrer"
@@ -140,14 +132,6 @@ export function Header() {
               </Link>
             ))}
           </div>
-          <a
-            href="https://demo.graffs.io/login"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex w-full h-11 items-center justify-center rounded-full bg-foreground text-background text-sm font-medium cursor-pointer"
-          >
-            Try the demo
-          </a>
           <a
             href="https://dataq.graffs.io/admin"
             target="_blank"
