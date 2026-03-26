@@ -143,6 +143,45 @@ const ARCH_LAYERS = [
 const ARCH_LEFT_RAIL = ["Guardrails", "Security Posture", "Critiquers", "Clinical Rules", "Confidence Gating", "Audit Trail"]
 const ARCH_RIGHT_RAIL = ["Claude", "GPT", "Mistral", "Open Source LLMs", "Graffs.io RAG", "Integration Engine"]
 
+const ORG_FUNCTIONS = [
+  {
+    name: "Commercial",
+    scope: "North America",
+    agents: ["Market Access", "Field Force Intelligence", "Payer Analytics", "Launch Sequencing"],
+    connects: ["Regulatory", "Supply Chain", "Medical Affairs"],
+  },
+  {
+    name: "Regulatory",
+    scope: "Global",
+    agents: ["FDA/EMA Tracker", "Label Change Impact", "Inspection Readiness", "Submission Planner"],
+    connects: ["Clinical", "Commercial", "Pharmacovigilance"],
+  },
+  {
+    name: "Clinical",
+    scope: "Global",
+    agents: ["Trial Intelligence", "Site Selection", "Enrollment Forecasting", "Protocol Optimization"],
+    connects: ["Regulatory", "Real-World Evidence", "Medical Affairs"],
+  },
+  {
+    name: "Medical Affairs",
+    scope: "North America",
+    agents: ["KOL Mapping", "MSL Territory", "Medical Information", "Publication Tracker"],
+    connects: ["Commercial", "Clinical", "Pharmacovigilance"],
+  },
+  {
+    name: "Supply Chain",
+    scope: "Global",
+    agents: ["Batch Release", "Cold-Chain Monitor", "Deviation Manager", "Demand Forecasting"],
+    connects: ["Commercial", "Regulatory", "Manufacturing"],
+  },
+  {
+    name: "Pharmacovigilance",
+    scope: "Global",
+    agents: ["Signal Detection", "CIOMS/MedWatch", "Interaction Monitor", "Risk-Benefit Analysis"],
+    connects: ["Regulatory", "Clinical", "Medical Affairs"],
+  },
+]
+
 const CASE_STUDIES = [
   {
     number: "Case 01",
@@ -454,6 +493,148 @@ function AgentsModule() {
             Every agent is backed by a Knowledge Graph, validated by a
             Critiquer, and governed by Clinical Guardrails.
           </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MODULE 2B — CROSS-ORG ORCHESTRATION
+   ═══════════════════════════════════════════════════════════════════ */
+
+function CrossOrgModule() {
+  const [active, setActive] = useState<number | null>(null)
+  return (
+    <section className="py-28 md:py-40">
+      <div className="max-w-6xl mx-auto px-6">
+        <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground text-center mb-5">
+          Cross-functional intelligence
+        </p>
+        <h2 className="text-4xl md:text-6xl font-bold tracking-[-0.04em] text-center mb-6 text-balance leading-[1.05]">
+          One platform across the entire org.
+        </h2>
+        <p className="text-center text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-6 leading-relaxed">
+          Agents don&apos;t live in silos. Every function — Commercial, Clinical,
+          Regulatory, Supply Chain — shares context through a single Knowledge Graph.
+          Insights surface across boundaries, not within them.
+        </p>
+        <p className="text-center text-muted-foreground/60 text-sm max-w-2xl mx-auto mb-16 leading-relaxed">
+          Inside each function, spin up purpose-built agents that understand the
+          needs of that team — and connect them to every other function in real time.
+        </p>
+
+        {/* Shared backbone strip */}
+        <div className="rounded-2xl bg-foreground/[0.03] px-5 py-3 mb-4 flex items-center justify-center gap-3">
+          <div className="h-2 w-2 rounded-full bg-sky-400" />
+          <p className="text-[11px] uppercase tracking-[0.18em] text-foreground/40 font-semibold">
+            Shared backbone — Knowledge Graph &middot; Guardrails &middot; Audit Trail
+          </p>
+          <div className="h-2 w-2 rounded-full bg-sky-400" />
+        </div>
+
+        {/* Function cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {ORG_FUNCTIONS.map((fn, idx) => {
+            const isActive = active === idx
+            return (
+              <button
+                key={fn.name}
+                onClick={() => setActive(isActive ? null : idx)}
+                className={`text-left rounded-2xl p-6 transition-all duration-200 ${
+                  isActive
+                    ? "bg-foreground text-background shadow-[0_4px_30px_rgba(0,0,0,0.12)]"
+                    : "bg-foreground/[0.025] hover:bg-foreground/[0.05]"
+                }`}
+              >
+                <div className="flex items-baseline justify-between mb-1">
+                  <p className={`text-lg font-semibold ${isActive ? "" : ""}`}>
+                    {fn.name}
+                  </p>
+                  <span
+                    className={`text-[10px] uppercase tracking-[0.16em] font-medium ${
+                      isActive ? "text-background/40" : "text-foreground/30"
+                    }`}
+                  >
+                    {fn.scope}
+                  </span>
+                </div>
+
+                {/* Agents inside this function */}
+                <div className="flex flex-wrap gap-1.5 mt-3">
+                  {fn.agents.map((a) => (
+                    <span
+                      key={a}
+                      className={`rounded-full px-2.5 py-1 text-[10px] font-medium ${
+                        isActive
+                          ? "bg-background/15 text-background/80"
+                          : "bg-foreground/[0.04] text-foreground/50"
+                      }`}
+                    >
+                      {a}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Cross-connections */}
+                <div
+                  className={`mt-4 pt-3 flex items-center gap-1.5 flex-wrap ${
+                    isActive
+                      ? "border-t border-background/10"
+                      : "border-t border-foreground/[0.06]"
+                  }`}
+                >
+                  <span
+                    className={`text-[10px] uppercase tracking-[0.14em] font-medium mr-1 ${
+                      isActive ? "text-background/35" : "text-foreground/25"
+                    }`}
+                  >
+                    Connects to
+                  </span>
+                  {fn.connects.map((c) => (
+                    <span
+                      key={c}
+                      className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                        isActive
+                          ? "bg-sky-400/25 text-sky-200"
+                          : "bg-sky-50 text-sky-600/70"
+                      }`}
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              </button>
+            )
+          })}
+        </div>
+
+        {/* NA Commercial callout */}
+        <div className="mt-8 rounded-2xl bg-sky-50/60 px-6 py-5 md:px-8 md:py-6 flex flex-col md:flex-row md:items-center gap-4">
+          <div className="flex-1">
+            <p className="text-sm font-semibold text-sky-800 mb-1">
+              Example: North America Commercial
+            </p>
+            <p className="text-sm text-sky-700/70 leading-relaxed">
+              A VP of Commercial NA spins up four agents — Market Access,
+              Field Force Intelligence, Payer Analytics, and Launch Sequencing.
+              Each agent draws from the same Knowledge Graph and automatically
+              connects to Regulatory Intelligence for label updates, Supply Chain
+              for inventory readiness, and Medical Affairs for KOL insights.
+              No manual hand-offs. No data silos.
+            </p>
+          </div>
+          <div className="flex-shrink-0 flex flex-col items-center gap-1.5">
+            <div className="rounded-full bg-sky-100 px-4 py-1.5 text-[11px] font-semibold text-sky-700">
+              4 agents spun up
+            </div>
+            <div className="rounded-full bg-sky-100 px-4 py-1.5 text-[11px] font-semibold text-sky-700">
+              3 functions connected
+            </div>
+            <div className="rounded-full bg-sky-100 px-4 py-1.5 text-[11px] font-semibold text-sky-700">
+              1 Knowledge Graph
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -968,6 +1149,7 @@ export function HealthcareSection() {
     <>
       <HeroModule />
       <AgentsModule />
+      <CrossOrgModule />
       <ArchitectureModule />
       <TrustModule />
       <ClinicalWalkthroughModule />
